@@ -40,13 +40,15 @@
 //--------------------------------------------------------------------+
 
 /*------------- MAIN -------------*/
-int main(void) {
+int main(void)
+{
   board_init();
 
   // init device stack on configured roothub port
   tud_init(BOARD_TUD_RHPORT);
 
-  if (board_init_after_tusb) {
+  if (board_init_after_tusb)
+  {
     board_init_after_tusb();
   }
 
@@ -57,11 +59,13 @@ int main(void) {
 
   tud_task(); // tinyusb device task
   // skip if hid is not ready yet
-  while (!tud_hid_ready()) {
+  while (!tud_hid_ready())
+  {
     tud_task(); // tinyusb device task
   }
 
-  while (1) {
+  while (1)
+  {
     tud_task(); // tinyusb device task
 
     // moving the mouse
@@ -94,7 +98,8 @@ void tud_resume_cb(void) {}
 // Application can use this to send the next report
 // Note: For composite reports, report[0] is report ID
 void tud_hid_report_complete_cb(uint8_t instance, uint8_t const *report,
-                                uint16_t len) {
+                                uint16_t len)
+{
   (void)instance;
   (void)len;
 }
@@ -104,7 +109,8 @@ void tud_hid_report_complete_cb(uint8_t instance, uint8_t const *report,
 // Return zero will cause the stack to STALL request
 uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id,
                                hid_report_type_t report_type, uint8_t *buffer,
-                               uint16_t reqlen) {
+                               uint16_t reqlen)
+{
   // TODO not Implemented
   (void)instance;
   (void)report_id;
@@ -119,6 +125,7 @@ uint16_t tud_hid_get_report_cb(uint8_t instance, uint8_t report_id,
 // received data on OUT endpoint ( Report ID = 0, Type = 0 )
 void tud_hid_set_report_cb(uint8_t instance, uint8_t report_id,
                            hid_report_type_t report_type, uint8_t const *buffer,
-                           uint16_t bufsize) {
+                           uint16_t bufsize)
+{
   (void)instance;
 }
