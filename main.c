@@ -57,6 +57,10 @@ int main(void)
   while (1)
   {
     int a = adc_read();
-    printf("%i\n", a);
+
+    putchar(a / 16);
+    // printf("%i\n", a / 16);
+
+    sleep_us(80);
   }
 }
