@@ -29,6 +29,7 @@
 #include <string.h>
 
 #include "pico/stdlib.h"
+#include "pico/time.h"
 
 #include "hardware/gpio.h"
 #include "hardware/adc.h"
@@ -54,13 +55,17 @@ int main(void)
   gpio_set_dir(PICO_DEFAULT_LED_PIN, GPIO_OUT);
   gpio_put(PICO_DEFAULT_LED_PIN, true);
 
+  absolute_time_t t1 = get_absolute_time();
   while (1)
   {
     int a = adc_read();
 
-    putchar(a / 16);
+    putchar(a >> 4);
     // printf("%i\n", a / 16);
 
-    sleep_us(80);
+    // sleep_us(80);
+
+    t1 = delayed_by_us(t1, 100);
+    sleep_until(t1);
   }
 }

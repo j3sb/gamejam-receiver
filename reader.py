@@ -24,9 +24,9 @@ while True:
         #     print(f"Got byte: {byte[0]:02X}")
         # else:
         #     print("nothing to read")
-    end = time.time()
     graph.set_ydata(data)
     plt.ylim([0, 256])
     plt.draw()
     plt.pause(1e-3)
-    print(f"took {1 / (end - start) / 1000 * hist_size} khz")
+    end = time.time()
+    print(f"sampling {1 / (end - start) / 1000 * hist_size} khz")
